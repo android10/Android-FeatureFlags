@@ -3,10 +3,38 @@ Still a WIP
 
 
 ## Local Development
-Here are some useful Gradle/adb commands for executing this example:
+For this project there are several build variants defined in order demonstrate the usage of feature flags.
+Gradle commands by convention are build using the following combination:
+```
+GRADLE TASK NAME: gradle task + product flavor + build type
+```
 
- * `./gradlew deployDebug` - Builds and install the debug apk on the current connected device.
- * `./gradlew runUnitTests` - Execute all unit tests (both unit and integration).
+### Unit Tests
+* `./gradlew runUnitTests` - Execute all unit tests for this project.
+
+### Build type: DEBUG
+* `./gradlew assembleDemoDebug` - Assembles the DEMO DEBUG version of the app.
+* `./gradlew assembleFullDebug` - Assembles the FULL DEBUG of the app.
+* `./gradlew deployDemoDebug` - Builds and installs the DEMO DEBUG apk on the current connected device.
+* `./gradlew deployFullDebug` - Builds and installs the FULL DEBUG apk on the current connected device.
+
+### Build type: STAGING
+* `./gradlew assembleDemoStaging` - Assembles the DEMO STAGING version of the app.
+* `./gradlew assembleFullStaging` - Assembles the FULL STAGING of the app.
+* `./gradlew deployDemoStaging` - Builds and installs the DEMO STAGING apk on the current connected device.
+* `./gradlew deployFullStaging` - Builds and installs the FULL STAGING apk on the current connected device.
+
+### Build type: RELEASE
+* `./gradlew assembleDemoRelease` - Assembles the DEMO RELEASE version of the app.
+* `./gradlew assembleFullRelease` - Assembles the FULL RELEASE of the app.
+* `./gradlew deployDemoRelease` - Builds and installs the DEMO RELEASE apk on the current connected device.
+* `./gradlew deployFullRelease` - Builds and installs the FULL RELEASE apk on the current connected device.
+
+#### References
+* [Fernando Cejas Blog Post](https://fernandocejas.com)
+* [Build Variants Android Official Doc](https://developer.android.com/studio/build/build-variants)
+
+
 
 ## License
 
