@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Feature Flags Android</string>
+    <string name="app_name">Feature Flags</string>
+
+    <string name="feature_one_name">Feature ONE</string>
+    <string name="feature_two_name">Feature TWO</string>
+    <string name="feature_three_name">Feature THREE</string>
+    <string name="feature_four_name">Feature FOUR</string>
 </resources>
