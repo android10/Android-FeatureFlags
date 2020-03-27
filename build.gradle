@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.3.61'
+    ext.kotlin_version = '1.3.71'
     repositories {
         google()
         jcenter()
@@ -17,17 +17,26 @@ allprojects {
     }
 }
 
-task runAppOnDevice(type: Exec) {
-    def rootDir = project.rootDir
-    def localProperties = new File(rootDir, "local.properties")
-    if (localProperties.exists()) {
-        Properties properties = new Properties()
-        localProperties.withInputStream {
-            inputStream -> properties.load(inputStream)
+class RunOnDeviceTask extends DefaultTask {
+    @Input String productFlavor = 'demoooo'
+    @Input String buildType = 'debugggg'
+
+    @TaskAction def run() {
+        project.exec {
+            def rootDir = project.rootDir
+            def localProperties = new File(rootDir, "local.properties")
+            if (localProperties.exists()) {
+                Properties properties = new Properties()
+                localProperties.withInputStream {
+                    inputStream -> properties.load(inputStream)
+                }
+                def sdkDir = properties.getProperty('sdk.dir')
+                def adb = "$sdkDir/platform-tools/adb"
+                def packageName = "com.fernandocejas.sample.app.${productFlavor}.${buildType}"
+                def mainActivity = "com.fernandocejas.sample.app.MainActivity"
+                commandLine "$adb", 'shell', 'am', 'start', '-n', "${packageName}/${mainActivity}"
+            }
         }
-        def sdkDir = properties.getProperty('sdk.dir')
-        def adb = "$sdkDir/platform-tools/adb"
-        commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.fernandocejas.sample.app.demo.debug/com.fernandocejas.sample.app.MainActivity'
     }
 }
 
@@ -39,38 +48,38 @@ task runUnitTests(dependsOn: [':app:testFullDebugUnitTest']) {
     description 'Run all unit tests'
 }
 
-task runDemoDebug(type: Exec, dependsOn: 'app:installDemoDebug') {
+task runDemoDebug(type: RunOnDeviceTask, dependsOn: 'app:installDemoDebug') {
     description 'Run DEMO - DEBUG version of the app.'
-    doLast { println 'Installing app on the connected device...' }
-    finalizedBy runAppOnDevice
+    productFlavor = 'demo'
+    buildType = 'debug'
 }
 
-task runDemoStaging(type: Exec, dependsOn: 'app:installDemoStaging') {
-    description 'Run DEMO - STAGING version of the app.'
-    doLast { println 'Installing app on the connected device...' }
-    finalizedBy runAppOnDevice
-}
-
-task runDemoRelease(type: Exec, dependsOn: 'app:installDemoRelease') {
-    description 'Run DEMO - RELEASE version of the app.'
-    doLast { println 'Installing app on the connected device...' }
-    finalizedBy runAppOnDevice
-}
-
-task runFullDebug(type: Exec, dependsOn: 'app:installFullDebug') {
-    description 'Run FULL - DEBUG version of the app.'
-    doLast { println 'Installing app on the connected device...' }
-    finalizedBy runAppOnDevice
-}
-
-task runFullStaging(type: Exec, dependsOn: 'app:installFullStaging') {
-    description 'Run FULL - STAGING version of the app.'
-    doLast { println 'Installing app on the connected device...' }
-    finalizedBy runAppOnDevice
-}
-
-task runFullRelease(type: Exec, dependsOn: 'app:installFullRelease') {
-    description 'Run FULL - RELEASE version of the app.'
-    doLast { println 'Installing app on the connected device...' }
-    finalizedBy runAppOnDevice
-}
+//task runDemoStaging(dependsOn: 'app:installDemoStaging') {
+//    description 'Run DEMO - STAGING version of the app.'
+//    doLast { println 'Installing app on the connected device...' }
+//    finalizedBy runAppOnDevice
+//}
+//
+//task runDemoRelease(dependsOn: 'app:installDemoRelease') {
+//    description 'Run DEMO - RELEASE version of the app.'
+//    doLast { println 'Installing app on the connected device...' }
+//    finalizedBy runAppOnDevice
+//}
+//
+//task runFullDebug(dependsOn: 'app:installFullDebug') {
+//    description 'Run FULL - DEBUG version of the app.'
+//    doLast { println 'Installing app on the connected device...' }
+//    finalizedBy runAppOnDevice
+//}
+//
+//task runFullStaging(dependsOn: 'app:installFullStaging') {
+//    description 'Run FULL - STAGING version of the app.'
+//    doLast { println 'Installing app on the connected device...' }
+//    finalizedBy runAppOnDevice
+//}
+//
+//task runFullRelease(dependsOn: 'app:installFullRelease') {
+//    description 'Run FULL - RELEASE version of the app.'
+//    doLast { println 'Installing app on the connected device...' }
+//    finalizedBy runAppOnDevice
+//}
