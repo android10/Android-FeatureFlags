@@ -19,6 +19,6 @@ class MainActivity : AppCompatActivity() {
         val buildType = BuildConfig.BUILD_TYPE.toUpperCase(Locale.getDefault())
         val productFlavor = BuildConfig.FLAVOR.toUpperCase(Locale.getDefault())
         val appName = getString(R.string.app_name)
-        toolbar.title = "$appName: $buildType - $productFlavor"
+        toolbar.title = "$appName: $productFlavor - $buildType"
     }
 }

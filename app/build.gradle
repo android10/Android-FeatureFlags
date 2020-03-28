@@ -61,3 +61,53 @@ dependencies {
     testImplementation 'io.mockk:mockk:1.9'
     testImplementation 'org.amshove.kluent:kluent-android:1.60'
 }
+
+task printVariantsName(){
+    doLast {
+        android.applicationVariants.all { variant ->
+            def buildType = "Build Type: ${buildType.name}"
+            def productFlavour = "Product Flavour: ${variant.flavorName}"
+            println "BUILD VARIANT -> ${buildType} - ${productFlavour}"
+        }
+    }
+}
+
+task runUnitTests(dependsOn: [':app:testFullDebugUnitTest']) {
+    description 'Run all unit tests'
+}
+
+class RunOnDeviceTask extends DefaultTask {
+    @Input String productFlavor = 'demo'
+    @Input String buildType = 'debug'
+
+    @TaskAction def run() {
+        project.exec {
+            def rootDir = project.rootDir
+            def localProperties = new File(rootDir, "local.properties")
+            if (localProperties.exists()) {
+                Properties properties = new Properties()
+                localProperties.withInputStream {
+                    inputStream -> properties.load(inputStream)
+                }
+                def sdkDir = properties.getProperty('sdk.dir')
+                def adb = "$sdkDir/platform-tools/adb"
+                def packageName = "com.fernandocejas.sample.app.${productFlavor}.${buildType}"
+                def mainActivity = "com.fernandocejas.sample.app.MainActivity"
+                commandLine "$adb", 'shell', 'am', 'start', '-n', "${packageName}/${mainActivity}"
+            }
+        }
+    }
+}
+
+afterEvaluate {
+    android.applicationVariants.all { variant ->
+        def type = buildType.name
+        def flavour = variant.flavorName
+
+        tasks.register("run${flavour.capitalize()}${type.capitalize()}", RunOnDeviceTask) {
+            dependsOn "install${flavour.capitalize()}${type.capitalize()}"
+            productFlavor = flavour
+            buildType = type
+        }
+    }
+}
