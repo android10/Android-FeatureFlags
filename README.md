@@ -12,19 +12,20 @@ GRADLE TASK NAME: gradle task + product flavor + build type
 ### Unit Tests
 * `./gradlew runUnitTests` - Execute all unit tests for this project.
 
-### Build type: DEBUG
+## Build Variants
+### DEBUG
 * `./gradlew assembleDemoDebug` - Assembles the **DEMO DEBUG** version of the app.
 * `./gradlew assembleFullDebug` - Assembles the **FULL DEBUG** of the app.
 * `./gradlew runDemoDebug` - Builds and installs the **DEMO DEBUG** apk on the current connected device.
 * `./gradlew runFullDebug` - Builds and installs the **FULL DEBUG** apk on the current connected device.
 
-### Build type: STAGING
+### STAGING
 * `./gradlew assembleDemoStaging` - Assembles the **DEMO STAGING** version of the app.
 * `./gradlew assembleFullStaging` - Assembles the **FULL STAGING** of the app.
 * `./gradlew runDemoStaging` - Builds and installs the **DEMO STAGING** apk on the current connected device.
 * `./gradlew runFullStaging` - Builds and installs the **FULL STAGING** apk on the current connected device.
 
-### Build type: RELEASE
+### RELEASE
 * `./gradlew assembleDemoRelease` - Assembles the **DEMO RELEASE** version of the app.
 * `./gradlew assembleFullRelease` - Assembles the **FULL RELEASE** of the app.
 * `./gradlew runDemoRelease` - Builds and installs the **DEMO RELEASE** apk on the current connected device.
