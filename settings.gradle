@@ -1,2 +1,3 @@
 rootProject.name='Feature Flags Android'
 include ':app'
+include ':featureflags'
