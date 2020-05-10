@@ -13,31 +13,31 @@
         style="@style/CustomToolBarStyle" />
 
     <TextView
-        android:id="@+id/featureOne"
+        android:id="@+id/featureLogin"
         style="@style/FeatureStyle"
         android:text="@string/feature_one_name"
         android:background="@android:color/holo_blue_dark"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <TextView
-        android:id="@+id/featureTwo"
+        android:id="@+id/featureRegistration"
         style="@style/FeatureStyle"
         android:text="@string/feature_two_name"
         android:background="@android:color/holo_red_dark"
-        app:layout_constraintTop_toBottomOf="@id/featureOne" />
+        app:layout_constraintTop_toBottomOf="@id/featureLogin" />
 
     <TextView
-        android:id="@+id/featureThree"
+        android:id="@+id/featureProfile"
         style="@style/FeatureStyle"
         android:text="@string/feature_three_name"
         android:background="@android:color/holo_green_dark"
-        app:layout_constraintTop_toBottomOf="@id/featureTwo" />
+        app:layout_constraintTop_toBottomOf="@id/featureRegistration" />
 
     <TextView
-        android:id="@+id/featureFour"
+        android:id="@+id/featureSearch"
         style="@style/FeatureStyle"
         android:text="@string/feature_four_name"
         android:background="@android:color/holo_purple"
-        app:layout_constraintTop_toBottomOf="@id/featureThree" />
+        app:layout_constraintTop_toBottomOf="@id/featureProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

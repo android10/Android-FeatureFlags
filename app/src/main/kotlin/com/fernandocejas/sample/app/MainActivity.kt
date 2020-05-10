@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         Feature(Flag.Login) {
-            whenEnabled { featureOne.visibility = INVISIBLE }
-            whenDisabled { println("Feature One DISABLED") }
+            whenEnabled { featureLogin.visibility = INVISIBLE }
+            whenDisabled { println("Feature Login DISABLED") }
         }
     }
 }
