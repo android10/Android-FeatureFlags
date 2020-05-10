@@ -1,4 +1,3 @@
 package com.fernandocejas.flags.data
 
-class LocalDataSource {
-}
+internal class LocalDataSource
