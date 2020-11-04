@@ -2,7 +2,7 @@ package com.fernandocejas.sample.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.fernandocejas.flags.Feature
+import com.fernandocejas.flags.FeatureFlag
 import com.fernandocejas.flags.Flag
 import com.fernandocejas.sample.app.extension.invisible
 import com.fernandocejas.sample.app.extension.visible
@@ -31,20 +31,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         //Feature Flags API 1
-        Feature(Flag.Login) {
-            whenEnabled { featureLogin.visible() }
-            whenDisabled { featureLogin.invisible() }
-        }
+        Flag.Login whenActivated { featureLogin.visible() } otherwise { featureLogin.invisible() }
 
         //Feature Flags API 2
-        Feature(Flag.Registration) whenEnabled { featureRegistration.visible() }
+//        FeatureFlag(Flag.Registration) whenEnabled { featureRegistration.visible() }
 
         //Feature Flags API 3
-        btnSearch.setOnClickListener {
-            Feature(Flag.NewSearch) {
-                whenEnabled { navigator.startNewSearch(applicationContext) }
-                whenDisabled { navigator.startLegacySearch(applicationContext) }
-            }
-        }
+//        btnSearch.setOnClickListener {
+//            FeatureFlag(Flag.NewSearch) {
+//                whenEnabled { navigator.startNewSearch(applicationContext) }
+//                whenDisabled { navigator.startLegacySearch(applicationContext) }
+//            }
+//        }
     }
 }
